@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+    environment {
+        MY_ENV_VAR = 'Hello, World!'
+        ANOTHER_VAR = 'Jenkins Pipeline'
+    }
+    stages {
+        stage('Build') {
+            steps {
+                script {
+                    echo "Building with environment variable: ${MY_ENV_VAR}"
+                    echo "Another variable: ${ANOTHER_VAR}"
+                }
+            }
+        }
+        stage('Test') {
+            steps {
+                script {
+                    echo "Testing with environment variable: ${MY_ENV_VAR}"
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                script {
+                    echo "Deploying with environment variable: ${MY_ENV_VAR}"
+                }
+            }
+        }
+    }
+}
