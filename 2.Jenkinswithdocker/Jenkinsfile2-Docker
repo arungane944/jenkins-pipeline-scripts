@@ -1,0 +1,17 @@
+// Docker plugins:
+// 1. Docker plugin: Agent based purposes
+// 2. Docker pipeline plugin: Pipeline based purposes
+
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                script {
+                    echo 'docker pipeline...'
+                    sh 'docker --version'
+                }
+            }
+        }
+    }
+}
