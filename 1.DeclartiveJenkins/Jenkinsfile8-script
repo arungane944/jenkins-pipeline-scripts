@@ -12,7 +12,7 @@ pipeline {
             steps {
                 script {
                     echo 'This is a script pipeline'
-                    sh 'cd script && chmod +x helloworld.sh && ./helloworld.sh'
+                    sh 'cd scripts && chmod +x helloworld.sh && ./helloworld.sh'
                 }
             }
         }
