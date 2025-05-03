@@ -17,13 +17,6 @@ pipeline {
                         echo "While loop iteration: ${j}"
                         j++
                     }
-
-                    // Do-while loop
-                    int k = 0
-                    do {
-                        echo "Do-while loop iteration: ${k}"
-                        k++
-                    } while (k < 5)
                 }
             }
         }
