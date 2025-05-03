@@ -1,11 +1,12 @@
 pipeline {
     agent any
-    stage('downstreamjob') {
-        steps {
-            script {
-                echo 'triggered by upstreamjob...'
-                echo 'this is downstream job'
+    stages {
+        stage('downstream Job') {
+            steps {
+                script {
+                    echo 'triggered by upstreamjob...'
+                    echo 'this is downstream job'
+                }
             }
-        }
     }
 }
