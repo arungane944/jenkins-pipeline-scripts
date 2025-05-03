@@ -1,0 +1,41 @@
+// Post action can be triigerred after completion of the job
+// regardless of the success or failure of the job.
+// Post action can be used to send notifications, clean up resources, or perform other tasks.
+
+
+pipeline {
+    agent any
+    stages {
+        stage('first stage') {
+            steps {
+                script {
+                    echo 'This is the first stage.'
+                }
+            }
+        }
+    }
+
+    post actions {
+        always {
+            script {
+                echo 'This will always run after the stages.'
+            }
+        }
+        success {
+            script {
+                echo 'This will run only if the pipeline is successful.'
+            }
+        }
+        failure {
+            script {
+                echo 'This will run only if the pipeline fails.'
+            }
+        }
+        unstable {
+            script {
+                echo 'This will run if the pipeline is unstable.'
+            }
+        }
+    }
+
+}
