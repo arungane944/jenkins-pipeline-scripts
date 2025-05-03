@@ -2,7 +2,7 @@ pipeline {
     agent any
     parameters {
         string defaultValue: 'Arun', description: 'This is a parameter', name: 'MY_PARAM', trim: true
-        choice choices: ['option1 option2 option3'], description: 'This is a choice parameter', name: 'MY_CHOICE_PARAM'
+        choice choices: ['option1', 'option2', 'option3'], description: 'This is a choice parameter', name: 'MY_CHOICE_PARAM'
 }
 
     stages {
