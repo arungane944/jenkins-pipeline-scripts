@@ -1,0 +1,27 @@
+//In a Jenkins scripted pipeline, you can use currentBuild.changeSets to access the 
+// changelog and changesets for the current build. This is useful for listing commit authors, 
+// messages, or affected files when there have been SCM changes (e.g., Git).
+
+node {
+    stage('Checkout') {
+        checkout scm
+    }
+
+    stage('Show Changes') {
+        def changeLogSets = currentBuild.changeSets
+        if (changeLogSets.size() == 0) {
+            echo "No changes detected in this build."
+        } else {
+            for (changeSet in changeLogSets) {
+                for (entry in changeSet.items) {
+                    echo "Commit by ${entry.author} on ${entry.timestamp}"
+                    echo "Message: ${entry.msg}"
+                    
+                    for (file in entry.affectedFiles) {
+                        echo " - ${file.editType.name} ${file.path}"
+                    }
+                }
+            }
+        }
+    }
+}

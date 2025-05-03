@@ -1,0 +1,20 @@
+node('workernode01'){
+	stage('Running in Parallel') {
+		parallel 'Parallel1': {
+			echo "Parallel1 executing"
+			sleep 10
+		},
+		'Parallel2': {
+			echo "Parallel2 executing"
+			sleep 10
+		},
+		'Parallel3': {
+			echo "Parallel3 executing"
+			sleep 10
+		},
+		failFast : true
+	}
+}
+
+// Failfast: If any one of the parallel branches fails, the rest of the running branches
+// will be aborted immediately.
