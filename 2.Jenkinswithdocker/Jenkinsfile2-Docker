@@ -4,12 +4,29 @@
 
 pipeline {
     agent any
+    tools {
+        maven 'maven-3.9.9'
+        docker
+    }
     stages {
-        stage('Build') {
+        stage('checkout') {
             steps {
                 script {
-                    echo 'docker pipeline...'
-                    sh 'docker --version'
+                    checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/arungane944/docker-hello-world-spring-boot.git']])
+                }
+            }
+        }
+        stage('Maven Build') {
+            steps {
+                script {
+                    sh "mvn clean package" 
+                }
+            }
+        }
+        stage('Docker Build') {
+            steps {
+                script {
+                    sh "docker build -t hello-world-spring-boot:latest ." 
                 }
             }
         }
