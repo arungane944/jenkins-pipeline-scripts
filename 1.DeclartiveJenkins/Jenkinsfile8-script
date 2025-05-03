@@ -1,0 +1,13 @@
+pipeline {
+    agent any
+    stages {
+        stage('script-pipeline') {
+            steps {
+                script {
+                    echo 'This is a script pipeline'
+                    sh 'cd script && chmod +x helloworld.sh && ./helloworld.sh'
+                }
+            }
+        }
+    }
+}

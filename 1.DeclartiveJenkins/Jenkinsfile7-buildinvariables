@@ -21,27 +21,4 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            script {
-                echo 'This will always run after the stages.'
-            }
-        }
-        success {
-            script {
-                echo 'This will run only if the pipeline is successful.'
-            }
-        }
-        failure {
-            script {
-                echo 'This will run only if the pipeline fails.'
-            }
-        }
-        unstable {
-            script {
-                echo 'This will run if the pipeline is unstable.'
-            }
-        }
-    }
-
 }
