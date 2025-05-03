@@ -1,0 +1,52 @@
+// Jenkins Built-in Variables
+// https://www.jenkins.io/doc/book/pipeline/jenkinsfile/#using-environment-variables
+
+
+pipeline {
+    agent any
+    stages {
+        stage('build-in variables') {
+            steps {
+                script {
+                    echo "Jenkins Home: ${env.JENKINS_HOME}"
+                    echo "Workspace: ${env.WORKSPACE}"
+                    echo "Job Number: ${env.BUILD_NUMBER}"
+                    echo "Job Name: ${env.JOB_NAME}"
+                    echo "Node Name: ${env.NODE_NAME}"
+                    echo "Build URL: ${env.BUILD_URL}"
+                    echo "Git Branch: ${env.GIT_BRANCH}"
+                    echo "Git Commit: ${env.GIT_COMMIT}"
+                }
+            }
+            steps {
+                script {
+                    echo 'This is the first stage.'
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            script {
+                echo 'This will always run after the stages.'
+            }
+        }
+        success {
+            script {
+                echo 'This will run only if the pipeline is successful.'
+            }
+        }
+        failure {
+            script {
+                echo 'This will run only if the pipeline fails.'
+            }
+        }
+        unstable {
+            script {
+                echo 'This will run if the pipeline is unstable.'
+            }
+        }
+    }
+
+}
