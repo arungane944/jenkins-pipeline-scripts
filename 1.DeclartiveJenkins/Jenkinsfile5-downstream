@@ -8,5 +8,6 @@ pipeline {
                     echo 'this is downstream job'
                 }
             }
+        }
     }
 }
