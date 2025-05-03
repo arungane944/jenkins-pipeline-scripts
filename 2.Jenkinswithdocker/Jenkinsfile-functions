@@ -1,0 +1,24 @@
+def greet(name) {
+    echo "Hello, ${name}!"
+}
+def add(a, b) {
+    return a + b
+}
+
+pipeline {
+    agent any
+    stages {
+        stage('Function Example') {
+            steps {
+                script {
+                    // Call the greet function
+                    greet('World')
+
+                    // Call the add function
+                    def sum = add(5, 10)
+                    echo "The sum is: ${sum}"
+                }
+            }
+        }
+    }
+}
