@@ -1,0 +1,18 @@
+node('workernode1') {
+    timeout(time: 5, unit: 'SECONDS') {
+        stage('Trigger Downstream Job with Retry') {
+            retry(3) {
+                echo "Attempt to build downstream job"
+                sleep(3) // Simulate some work (interruptible)
+                
+                def buildResult = build job: 'your-downstream-job-name',
+                                        wait: true,
+                                        propagate: true,
+                                        parameters: [
+                                            string(name: 'PARAM1', value: 'value1')
+                                        ]
+                echo "Build succeeded"
+            }
+        }
+    }
+}

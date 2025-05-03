@@ -1,0 +1,12 @@
+// Allocates custom workspace for you in nodes/agents
+node('workernode1') {
+    def dockerImg = docker.image('redis')
+    stage('Build') {
+        ws('home/ec2-user/jenkins-workspaces/test') {
+            sh 'touch test.txt'
+            dockerImg.inside {
+                sh 'echo "Hello World"'
+            }
+        }
+    }
+}

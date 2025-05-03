@@ -1,0 +1,31 @@
+node('workernode1') {
+        stage('Trigger Downstream Job with Retry') {
+        int maxRetries = 3
+        int attempt = 1
+        boolean success = false
+
+        while (attempt <= maxRetries && !success) {
+            try {
+                sleep(10)
+                echo "Attempt #${attempt} to build downstream job"
+                
+                // Trigger another job and wait for result
+                def buildResult = build job: 'your-downstream-job-name',
+                                        wait: true,
+                                        propagate: true, // fail this job if downstream fails
+                                        parameters: [
+                                            string(name: 'PARAM1', value: 'value1')
+                                        ]
+                
+                echo "Build succeeded on attempt #${attempt}"
+                success = true
+            } catch (err) {
+                echo "Build failed on attempt #${attempt}: ${err}"
+                if (attempt == maxRetries) {
+                    error "All ${maxRetries} attempts failed. Failing pipeline."
+                }
+            }
+            attempt++
+        }
+    }
+} // Set a timeout for the entire pipeline

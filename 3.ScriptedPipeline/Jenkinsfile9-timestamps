@@ -1,0 +1,12 @@
+timestamps {
+    node('workernode1') {
+        stage('Build') {
+            echo 'Building...'
+            sh 'sleep 5'
+        }
+        stage('Test') {
+            echo 'Testing...'
+            sh 'sleep 5'
+        }
+    }
+}
