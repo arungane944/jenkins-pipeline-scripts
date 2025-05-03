@@ -3,7 +3,9 @@
 // 2. Docker pipeline plugin: Pipeline based purposes
 
 pipeline {
-    agent any
+    agent {
+        label 'workernode1'
+    }
     tools {
         maven 'maven-3.9.9'
         docker 'docker-v'
