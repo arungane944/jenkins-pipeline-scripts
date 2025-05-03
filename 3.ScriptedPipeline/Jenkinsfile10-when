@@ -1,0 +1,25 @@
+//Variables set in withEnv are available only within its block.
+
+node('workernode1') {
+    def isTriggerable = true
+    def isBuildable = true
+    stage('Set Environment and Build') {
+        withEnv(["BUILD_ENV=production", "VERSION=1.2.3"]) {
+            echo "Environment: ${env.BUILD_ENV}"
+            echo "Version: ${env.VERSION}"
+            if (env.BUILD_ENV == 'production' && isTriggerable && isBuildable) {
+                echo "Production build"
+            } else {
+                echo "Non-triggerable build"
+            }
+        }
+    }
+
+    stage('Test withEnv') {
+            echo "Testing in environment: ${env.BUILD_ENV}"
+            
+            sh '''
+                echo "Running tests in $BUILD_ENV mode"
+            '''
+    }
+}

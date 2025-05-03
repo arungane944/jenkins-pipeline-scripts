@@ -1,0 +1,43 @@
+node{	
+	properties(
+		[
+			pipelineTriggers([
+				triggers: [
+						[
+							$class: 'jenkins.triggers.ReverseBuildTrigger',
+							upstreamProjects: "scripted-upstream-job1,scripted-upstream-job2", 
+							threshold: hudson.model.Result.SUCCESS //UNSTABLE, FAILURE, NOT_BUILT and ABORTED
+						]
+				]
+			]),
+		]
+	)
+	stage('Build') {			
+		echo 'scripted-upstream executed'
+	}
+}
+
+
+--
+
+node {			
+	stage('Build') {			
+		echo 'scripted-upstream-job1 executed'			
+	}			
+}
+
+
+node {			
+	stage('Build') {			
+		currentBuild.result='UNSTABLE'				
+	}			
+}
+
+
+--
+
+node {			
+	stage('Build') {			
+		echo 'scripted-upstream-job2 executed'				
+	}			
+}

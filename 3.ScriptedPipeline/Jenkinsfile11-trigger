@@ -1,0 +1,20 @@
+node('workernode1') {
+    properties(
+        [
+            pipelineTriggers(
+                [
+                    cron('* * * * *') // This will run the job every minute
+                ]
+            )
+        ]
+        )
+
+    stage('Build') {
+        echo 'Building...'
+        sh 'sleep 5'
+    }
+    stage('Test') {
+        echo 'Testing...'
+        sh 'sleep 5'
+    }
+}

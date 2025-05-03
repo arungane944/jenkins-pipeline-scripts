@@ -1,0 +1,16 @@
+node('workernode1') {
+    properties(
+        [
+            pipelineTriggers(
+                [
+                    pollSCM('* * * * *') // This will run the job every minute
+                ]
+            )
+        ]
+        )
+
+    stage('Clone Repo') { 
+      git 'https://github.com/arungane944/docker-hello-world-spring-boot.git'         
+      mvnHome = tool 'maven3'
+    } 
+}
