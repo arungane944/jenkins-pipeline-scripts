@@ -7,8 +7,8 @@ pipeline {
         label 'workernode1'
     }
     tools {
-        maven 'maven-3.9.9'
-        docker 'docker-v'
+        maven 'maven-3'
+        docker 'docker'
     }
     stages {
         stage('checkout') {
