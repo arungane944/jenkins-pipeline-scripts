@@ -18,11 +18,6 @@ pipeline {
                     echo "Git Commit: ${env.GIT_COMMIT}"
                 }
             }
-            steps {
-                script {
-                    echo 'This is the first stage.'
-                }
-            }
         }
     }
 
