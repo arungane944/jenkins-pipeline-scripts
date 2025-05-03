@@ -6,6 +6,9 @@ pipeline {
     agent {
         label 'workernode1'
     }
+    tools {
+        maven 'maven3'
+    }
     stages {
         stage('checkout') {
             steps {
