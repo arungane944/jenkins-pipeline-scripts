@@ -1,0 +1,17 @@
+// Upstream and Downstream Jobs
+// Upstream jobs are jobs that trigger other jobs, while downstream jobs are the 
+// ones that are triggered.
+pipeline {
+    agent any
+
+    stages {
+        stage('Upstream Job') {
+            steps {
+                script {
+                    echo 'This is the upstream job.'
+                    build job: 'Downstream-Job'
+                }
+            }
+        }
+    }
+}
