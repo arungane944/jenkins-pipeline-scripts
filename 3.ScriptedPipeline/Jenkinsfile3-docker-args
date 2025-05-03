@@ -1,0 +1,13 @@
+node('workernode1') {
+    def dockerImg = docker.image('maven:3.8.6-eclipse-temurin-11')
+    stage('pullimage') {
+        dockerImg.pull()
+    }
+    stage('run arguments') {
+        dockerImg.inside('-e someEnv=dev', {
+            sh 'echo $someEnv'
+        })
+    }
+}
+
+// Here we are passing the docker run arguments

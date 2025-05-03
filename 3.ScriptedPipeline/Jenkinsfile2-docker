@@ -1,0 +1,11 @@
+node('workernode1') {
+    def dockerImg = docker.image('maven:3.8.6-eclipse-temurin-11')
+    stage('pullimage') {
+        dockerImg.pull()
+    }
+    stage('Build') {
+        dockerImg.inside {
+            sh 'mvn -v'
+        }
+    }
+}
