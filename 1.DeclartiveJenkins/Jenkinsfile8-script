@@ -4,7 +4,7 @@ pipeline {
         stage('checkout') {
             steps {
                 script {
-                    checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/arungane944/docker-hello-world-spring-boot.git']])
+                    checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/arungane944/jenkins-pipeline-scripts.git']])
                 }
             }
         }
@@ -12,7 +12,7 @@ pipeline {
             steps {
                 script {
                     echo 'This is a script pipeline'
-                    sh 'cd scripts && chmod +x helloworld.sh && ./helloworld.sh'
+                    sh 'cd 1.DeclartiveJenkins/scripts && chmod +x helloworld.sh && ./helloworld.sh'
                 }
             }
         }
